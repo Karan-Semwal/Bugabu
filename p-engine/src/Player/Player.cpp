@@ -45,7 +45,7 @@ void Player::update(Tilemap& map, sf::Event& event)
 void Player::render(sf::RenderWindow& window) 
 {
     window.draw(m_player);
-    // hitbox.render(window);
+    hitbox.render(window);
 }
 
 

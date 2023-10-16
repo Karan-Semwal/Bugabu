@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include "Global.h"
 
 Menu::Menu(sf::RenderWindow& win)
   : window(&win),
@@ -39,7 +40,7 @@ void Menu::update()
         window->close();
     }
 
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    if (isPressed(sf::Keyboard::Escape))
         isPlaying = false;
 }
 

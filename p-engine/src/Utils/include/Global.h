@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 
+#define isPressed(Key) sf::Keyboard::isKeyPressed(Key)
+
 inline const int TILE_WIDTH  = 64;
 inline const int TILE_HEIGHT = 64;
 

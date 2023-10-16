@@ -157,7 +157,7 @@ private:
 //         sf::Event evnt;
 //         while (window.pollEvent(evnt))
 //         {
-//             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) window.close();
+//             if (isPressed(sf::Keyboard::Escape)) window.close();
 //             if (evnt.type == sf::Event::Closed) window.close();
 //         }
 

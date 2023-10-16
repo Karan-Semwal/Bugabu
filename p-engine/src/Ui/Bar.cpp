@@ -1,4 +1,5 @@
 #include "Bar.h"
+#include "Global.h"
 
 Bar::Bar(float amount, float mx, float my)
     : max_x(mx), max_y(my),
@@ -17,10 +18,10 @@ void Bar::init()
 
 void Bar::update()
 {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+    if (isPressed(sf::Keyboard::D)) {
         this->decrease();
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::I)) {
+    if (isPressed(sf::Keyboard::I)) {
         this->increase();
     }
     m_bar.setSize(m_size);
