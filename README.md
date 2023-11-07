@@ -20,6 +20,5 @@ Run `./run.sh`
 ---
 
 
-
-https://github.com/Karansemwal/Bugabu/assets/96228962/c432bddb-ad73-4631-a2f0-4289ac3b6e2b
+https://github.com/Karansemwal/Bugabu/assets/96228962/794837e6-8620-4387-8058-d98aafaf3726
 
