@@ -20,7 +20,7 @@ bool PlayerController::canMove(const sf::Vector2f& pos, Tilemap& map) {
 
 void PlayerController::gravity(Player& player, Tilemap& map) {
     
-    if (isInAir) {
+    if (isOnFloor) {
         GRAVITY = lerpValue(GRAVITY, GRAVITY_LIMIT, GRAVITY_LERP_VALUE);
         sf::Vector2f pos = player.getPosition();
         if (canMove({player.hitbox.getBottomLeft().x, player.hitbox.getBottomLeft().y + GRAVITY} , map)) {
@@ -31,6 +31,16 @@ void PlayerController::gravity(Player& player, Tilemap& map) {
     else {
         GRAVITY = 0.f;
     }
+}
+
+bool isOnGround(Player& player, Tilemap& map)
+{
+    sf::Vector2f playerPos(player.getPosition());
+    int pTileX = int(playerPos.x / TILE_WIDTH_SIZE);
+    int pTileY = int(playerPos.y / TILE_HEIGHT_SIZE);
+
+    char playerTile = map.getChatAtMap(pTileX, pTileY + 1);
+    return playerTile == '#';
 }
 
 void PlayerController::update(Player& player, Tilemap& map, sf::Event& event)
@@ -100,24 +110,23 @@ void PlayerController::update(Player& player, Tilemap& map, sf::Event& event)
 
 void PlayerController::jump(Player& player, Tilemap& map, sf::Event& event)
 {
+    sf::Vector2f pos = player.getPosition();
     if (!isJumping) {
-        if (JUMP_COUNT == 0) {
-            if (isPressed(sf::Keyboard::Space)) {
+        if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
+            if (canMove({pos.x, pos.y + GRAVITY}, map)) {
                 isJumping = true;
-                JUMP_COUNT++;
                 std::cout << "Jumping started\n";
             }
         }
     }
     if (isJumping) {
-        isInAir = true;
-        sf::Vector2f pos = player.getPosition();
-        tmpVelocity += m_jumpValue;
-        pos.y -= m_jumpValue;
+        isOnFloor = false;
+        tmpVelocity += JUMP_MAGNITUDE;
+        pos.y -= JUMP_MAGNITUDE;
         if (tmpVelocity >= JUMP_LIMIT) {
             tmpVelocity = 0.f;
-            JUMP_COUNT--;
             isJumping = false;
+            isOnFloor = true;
             std::cout << "Jumping stopped\n";
         }
         player.setPosition(pos);

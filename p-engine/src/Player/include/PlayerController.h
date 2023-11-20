@@ -6,6 +6,9 @@
 #include "Tilemap.h"
 #include "Util.h"
 
+#define JUMP_LIMIT  50.f
+#define JUMP_MAGNITUDE 10.f
+
 class PlayerController
 {
 public:
@@ -23,15 +26,12 @@ private:
     sf::Vector2f m_velocity;
 
     bool isJumping    = false;
-    bool isInAir      = true;
+    bool isOnFloor    = true;
     bool isMovingLeft = false;
 
     float GRAVITY            = 0.0f;
     float GRAVITY_LIMIT      = 4.f;
     float GRAVITY_LERP_VALUE = 0.1f;
 
-    float JUMP_LIMIT  = 50.f;
     float tmpVelocity = 0.f;
-    float m_jumpValue = 10.5f;
-    short JUMP_COUNT = 0;
 };
